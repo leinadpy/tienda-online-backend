@@ -10,7 +10,10 @@
 ```
 yarn install
 ```
-
+__Observación:__ Debes tener instalado el comando yarn, puedes instalarlo con
+```
+npm install -g yarn
+```
 3. Clonar el archivo `.env.template` y renombralo a `.env`
 4. Cambiar las variables de entorno __(opcional)__.
 5. Correr la base de datos con

@@ -17,7 +17,7 @@ import { UsersModule } from './users/users.module';
               }
             : null,
       },
-      type: 'postgres',
+      type: 'mysql',
       host: process.env.DB_HOST,
       port: +process.env.DB_PORT,
       database: process.env.DB_NAME,

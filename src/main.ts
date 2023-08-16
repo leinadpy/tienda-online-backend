@@ -1,27 +1,33 @@
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
+import { ConfigService } from '@nestjs/config';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const logger = new Logger('Bootstrap');
+async function bootstrap(): Promise<any> {
+  const app: INestApplication = await NestFactory.create(AppModule);
+  const logger: Logger = new Logger('Bootstrap');
+  const configService = app.get<ConfigService>(ConfigService);
 
-  new ValidationPipe({
-    whitelist: true,
-    forbidNonWhitelisted: true,
-  });
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
 
-  const config = new DocumentBuilder()
-    .setTitle('Tienda online')
-    .setDescription('Tienda online endpoints')
+  const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
+    .setTitle('Store online')
+    .setDescription('Store online endpoints')
     .setVersion('1.0')
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document: OpenAPIObject = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(process.env.PORT);
-  logger.log(`App running on port ${process.env.PORT}`);
+  return app.listen(configService.get<string>('PORT'), (): void => {
+    logger.log(`App running on port ${configService.get<string>('PORT')}`);
+  });
 }
+
 bootstrap();

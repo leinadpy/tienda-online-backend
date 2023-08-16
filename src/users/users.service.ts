@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { SignupDto } from '../auth/dto';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from '@nestjs/common';
 
@@ -24,7 +24,7 @@ export class UsersService {
 
   async create(signupInput: SignupDto): Promise<User> {
     try {
-      const newUser = this.usersRepository.create({
+      const newUser: User = this.usersRepository.create({
         ...signupInput,
         password: bcrypt.hashSync(signupInput.password, 10),
       });
@@ -72,12 +72,8 @@ export class UsersService {
     }
   }
 
-  async block(id: string): Promise<User> {
-    const userToBlock = await this.findOneById(id);
-
-    userToBlock.isActive = false;
-
-    return await this.usersRepository.save(userToBlock);
+  async block(id: string): Promise<UpdateResult> {
+    return this.usersRepository.softDelete(id);
   }
 
   private handleBDErrors(error: any): never {

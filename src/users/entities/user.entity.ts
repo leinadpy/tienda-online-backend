@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '../../shared/base-entity';
 
 @Entity({ name: 'users' })
-export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class User extends BaseEntity {
   @Column()
   fullName: string;
 
@@ -13,12 +11,4 @@ export class User {
 
   @Column()
   password: string;
-
-  @Column({
-    type: 'boolean',
-    default: true,
-  })
-  isActive: boolean;
-
-  // TODO: relaciones
 }

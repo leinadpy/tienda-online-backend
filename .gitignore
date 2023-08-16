@@ -3,6 +3,7 @@
 /node_modules
 
 # Volumes
+/postgres
 /mysql
 
 # Logs

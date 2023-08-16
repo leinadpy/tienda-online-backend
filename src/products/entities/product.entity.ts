@@ -10,4 +10,10 @@ export class Product {
     length: 150,
   })
   name: string;
+
+  @Column({
+    type: 'varchar',
+    length: 255,
+  })
+  description: string;
 }

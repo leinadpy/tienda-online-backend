@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { CustomersModule } from './customers/customers.module';
 import { ShoopingCartModule } from './shooping-cart/shooping-cart.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { ShoopingCartModule } from './shooping-cart/shooping-cart.module';
     ProductsModule,
     CustomersModule,
     ShoopingCartModule,
+    OrdersModule,
   ],
   controllers: [],
   providers: [],

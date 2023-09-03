@@ -18,7 +18,7 @@ export class Customer {
   password: string;
 
   @Column({ type: 'date' })
-  register_date: string;
+  register_date: Date;
 
   // TODO: relaciones
 }

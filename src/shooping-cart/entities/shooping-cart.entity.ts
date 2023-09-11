@@ -1,9 +1,10 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { UpdateShoopingCartDto } from '../dto/update-shooping-cart.dto';
-import { CreateShoopingCartDto, Status } from '../dto/create-shooping-cart.dto';
+
+import { Status } from '../dto/create-shooping-cart.dto';
+import { BaseEntity } from '../../shared/base-entity';
 
 @Entity({ name: 'shooping-cart' })
-export class ShoopingCart extends UpdateShoopingCartDto {
+export class ShoopingCart extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

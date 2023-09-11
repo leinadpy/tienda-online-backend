@@ -1,8 +1,11 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from '../../shared/base-entity';
 
 @Entity({ name: 'products' })
 export class Product extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
   @Column({
     type: 'varchar',
     length: 150,
@@ -15,10 +18,10 @@ export class Product extends BaseEntity {
   })
   description: string;
   @Column({
-    type: 'number',
+    type: 'varchar',
     length: 10,
   })
-  price: number;
+  price: string;
   @Column({
     type: 'varchar',
     length: 3,
@@ -35,8 +38,7 @@ export class Product extends BaseEntity {
   })
   material: string;
   @Column({
-    type: 'number',
-    length: 10,
+    type: 'integer',
   })
   stock: number;
   @Column({

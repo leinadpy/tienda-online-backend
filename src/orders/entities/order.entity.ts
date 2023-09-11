@@ -6,9 +6,9 @@ import {
   //JoinColumn,
 } from 'typeorm';
 //import { ShoppingCart } from '../../shopping-cart/entities/shopping-cart.entity.ts'; // Import your ShoppingCart entity here
-
+import { BaseEntity } from 'typeorm';
 @Entity({ name: 'orders' })
-export class Order {
+export class Order extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

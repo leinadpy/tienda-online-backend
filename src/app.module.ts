@@ -11,7 +11,6 @@ import { OrdersModule } from './orders/orders.module';
 import { CategoriesModule } from './categories/categories.module';
 import { BrandsModule } from './brands/brands.module';
 import { CartProductModule } from './cart_product/cart_product.module';
-import { BaseModule } from './base/base.module';
 
 @Module({
   imports: [
@@ -57,7 +56,6 @@ import { BaseModule } from './base/base.module';
     CategoriesModule,
     BrandsModule,
     CartProductModule,
-    BaseModule,
   ],
   controllers: [],
   providers: [],

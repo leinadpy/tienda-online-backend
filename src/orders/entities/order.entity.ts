@@ -1,17 +1,12 @@
 import {
   Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  //OneToOne,
+  Entity, //OneToOne,
   //JoinColumn,
 } from 'typeorm';
 //import { ShoppingCart } from '../../shopping-cart/entities/shopping-cart.entity.ts'; // Import your ShoppingCart entity here
 import { BaseEntity } from 'typeorm';
 @Entity({ name: 'orders' })
 export class Order extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
   @Column({ type: 'date' })
   order_date: Date;
 

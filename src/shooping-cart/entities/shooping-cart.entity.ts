@@ -1,13 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 import { Status } from '../dto/create-shooping-cart.dto';
 import { BaseEntity } from '../../shared/base-entity';
 
 @Entity({ name: 'shooping-cart' })
 export class ShoopingCart extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
   @Column({
     type: 'enum',
     enum: ['OPEN', 'CLOSED', 'CANCELED'],

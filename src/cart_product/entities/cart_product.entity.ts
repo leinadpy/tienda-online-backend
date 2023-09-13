@@ -1,8 +1,8 @@
 import { Column, Entity } from 'typeorm';
 import { BaseEntity } from '../../shared/base-entity';
-//TO DO: FK cart_id
-//TO DO: FK product_id
-@Entity({ name: 'brands' })
+//TODO: FK cart_id
+//TODO: FK product_id
+@Entity({ name: 'cart_product' })
 export class CartProduct extends BaseEntity {
   @Column({
     type: 'varchar',

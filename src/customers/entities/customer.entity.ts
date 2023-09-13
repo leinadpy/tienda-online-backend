@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '../../shared/base-entity';
 
 @Entity({ name: 'customers' })
-export class Customer {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class Customer extends BaseEntity {
   @Column()
   name: string;
 
@@ -18,7 +16,7 @@ export class Customer {
   password: string;
 
   @Column({ type: 'date' })
-  register_date: string;
+  register_date: Date;
 
   // TODO: relaciones
 }

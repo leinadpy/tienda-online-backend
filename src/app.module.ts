@@ -7,6 +7,10 @@ import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { CustomersModule } from './customers/customers.module';
 import { ShoopingCartModule } from './shooping-cart/shooping-cart.module';
+import { OrdersModule } from './orders/orders.module';
+import { CategoriesModule } from './categories/categories.module';
+import { BrandsModule } from './brands/brands.module';
+import { CartProductModule } from './cart_product/cart_product.module';
 
 @Module({
   imports: [
@@ -48,6 +52,10 @@ import { ShoopingCartModule } from './shooping-cart/shooping-cart.module';
     ProductsModule,
     CustomersModule,
     ShoopingCartModule,
+    OrdersModule,
+    CategoriesModule,
+    BrandsModule,
+    CartProductModule,
   ],
   controllers: [],
   providers: [],

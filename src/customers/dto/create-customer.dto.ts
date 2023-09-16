@@ -1,1 +1,18 @@
-export class CreateCustomerDto {}
+import { IsDate, IsString } from "class-validator";
+
+export class CreateCustomerDto {
+    @IsString()
+    name: string;
+  
+    @IsString()
+    address: string;
+  
+    @IsString()
+    email: string;
+  
+    @IsString()
+    password: string;
+  
+    @IsDate()
+    register_date: Date;
+}

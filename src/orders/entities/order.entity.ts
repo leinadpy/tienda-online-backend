@@ -1,7 +1,9 @@
 import { BaseEntity } from 'src/shared/base-entity';
+import { ShoppingCart } from 'src/shopping-cart/entities/shopping-cart.entity';
 import {
   Column,
-  Entity, //OneToOne,
+  Entity,
+  OneToOne, //OneToOne,
   //JoinColumn,
 } from 'typeorm';
 //import { ShoppingCart } from '../../shopping-cart/entities/shopping-cart.entity.ts'; // Import your ShoppingCart entity here
@@ -28,6 +30,8 @@ export class Order extends BaseEntity {
   @Column()
   delivery_address: string;
 
+  @OneToOne(() => ShoppingCart, (shopping_cart) => shopping_cart.order)
+  shopping_cart: ShoppingCart;
   // TODO: relaciones
   // @OneToOne(() => ShoppingCart, (ShoppingCart) => ShoppingCart.orders)
   // @JoinColumn({ name: 'shopping_cart_id' })

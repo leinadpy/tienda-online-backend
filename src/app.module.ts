@@ -6,7 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { CustomersModule } from './customers/customers.module';
-import { ShoopingCartModule } from './shooping-cart/shooping-cart.module';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { OrdersModule } from './orders/orders.module';
 import { CategoriesModule } from './categories/categories.module';
 import { BrandsModule } from './brands/brands.module';
@@ -51,7 +51,7 @@ import { CartProductModule } from './cart_product/cart_product.module';
     UsersModule,
     ProductsModule,
     CustomersModule,
-    ShoopingCartModule,
+    ShoppingCartModule,
     OrdersModule,
     CategoriesModule,
     BrandsModule,

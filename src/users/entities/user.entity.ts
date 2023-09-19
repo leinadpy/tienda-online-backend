@@ -14,5 +14,5 @@ export class User extends BaseEntity {
   password: string;
 
   @OneToOne(() => Customer, (customer) => customer.user)
-  customer:Customer;
+  customer: Customer;
 }

@@ -56,8 +56,6 @@ export class Product extends BaseEntity {
   @ManyToOne(() => Brand, (brand) => brand.products)
   brand: Brand;
 
-  @OneToMany(() => CartProduct,(cart_product) => cart_product.product)
-  cart_products: CartProduct[]
-
-
+  @OneToMany(() => CartProduct, (cart_product) => cart_product.product)
+  cart_products: CartProduct[];
 }

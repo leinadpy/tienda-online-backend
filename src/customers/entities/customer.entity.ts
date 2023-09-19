@@ -21,7 +21,7 @@ export class Customer extends BaseEntity {
   register_date: Date;
 
   @OneToMany(() => ShoppingCart, (shopping_cart) => shopping_cart.customer)
-  shopping_carts: ShoppingCart[]
+  shopping_carts: ShoppingCart[];
 
   @OneToOne(() => User, (user) => user.customer)
   user: User;

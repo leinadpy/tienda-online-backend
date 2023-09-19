@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
-import { Status } from '../dto/create-shopping-cart.dto';
+import { Status } from '../../enum/shopping-cart.enum';
 import { BaseEntity } from '../../shared/base-entity';
 import { CartProduct } from 'src/cart_product/entities/cart_product.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
@@ -10,16 +10,16 @@ import { Order } from 'src/orders/entities/order.entity';
 export class ShoppingCart extends BaseEntity {
   @Column({
     type: 'enum',
-    enum: ['OPEN', 'CLOSED', 'CANCELED'],
-    default: 'OPEN',
-  }) //Utilize un enum como decia el grafico con valores provisorios
+    enum:Status,
+    default: Status.OPEN
+  })
   status: Status;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) //No se si es lo correcto
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   startedAt: Date;
 
   @OneToMany(() => CartProduct,(cart_product) => cart_product.shopping_cart)
-  cart_prudocts: CartProduct[];
+  cart_products: CartProduct[];
 
   @ManyToOne(() => Customer, (customer) => customer.shopping_carts)
   customer:Customer;

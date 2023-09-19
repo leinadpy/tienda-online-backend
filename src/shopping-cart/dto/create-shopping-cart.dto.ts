@@ -1,17 +1,13 @@
-import { IsDate, IsString } from "class-validator"
+import { IsDate, IsString } from 'class-validator';
+import { Status } from '../../enum/shopping-cart.enum';
 
-export enum Status {
-    OPEN = 'OPEN',
-    CLOSED = 'CLOSED',
-    CANCELED = 'CANCELED'
-}
 export class CreateShoppingCartDto {
-    @IsString()
-    status: Status
+  @IsString()
+  status: Status.OPEN;
 
-    @IsDate()
-    startedAt: Date
+  @IsDate()
+  startedAt: Date;
 
-    @IsString()
-    customer_id: string
+  @IsString()
+  customer_id: string;
 }

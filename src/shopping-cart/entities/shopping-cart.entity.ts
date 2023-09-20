@@ -13,7 +13,6 @@ export class ShoppingCart extends BaseEntity {
     enum:Status,
     default: Status.OPEN
   })
-  status: Status;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   startedAt: Date;

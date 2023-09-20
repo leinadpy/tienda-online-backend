@@ -5,9 +5,6 @@ export class CreateShoppingCartDto {
   @IsString()
   status: Status.OPEN;
 
-  @IsDate()
-  startedAt: Date;
-
   @IsString()
   customer_id: string;
 }

@@ -1,5 +1,7 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
 import { BaseEntity } from '../../shared/base-entity';
+import { ShoppingCart } from 'src/shopping-cart/entities/shopping-cart.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity({ name: 'customers' })
 export class Customer extends BaseEntity {
@@ -18,5 +20,9 @@ export class Customer extends BaseEntity {
   @Column({ type: 'date' })
   register_date: Date;
 
-  // TODO: relaciones
+  @OneToMany(() => ShoppingCart, (shopping_cart) => shopping_cart.customer)
+  shopping_carts: ShoppingCart[];
+
+  @OneToOne(() => User, (user) => user.customer)
+  user: User;
 }

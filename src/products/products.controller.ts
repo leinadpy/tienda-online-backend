@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Logger,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -23,7 +22,6 @@ import { Product } from './entities/product.entity';
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
-  private readonly logger: Logger = new Logger(ProductsController.name);
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()

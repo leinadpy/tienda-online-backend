@@ -1,11 +1,10 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { CreateProductDto, UpdateProductDto } from './dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
-import { CategoriesService } from 'src/categories/categories.service';
-import { BrandsService } from 'src/brands/brands.service';
+import { CategoriesService } from '../categories/categories.service';
+import { BrandsService } from '../brands/brands.service';
 
 @Injectable()
 export class ProductsService {
@@ -19,9 +18,9 @@ export class ProductsService {
   ) {}
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
-    const brand = await this.brandService.findOne(createProductDto.brand_id);
+    const brand = await this.brandService.findOne(createProductDto.brandId);
     const category = await this.categoriesService.findOne(
-      createProductDto.category_id,
+      createProductDto.categoryId,
     );
 
     const newProduct = this.productRepository.create({

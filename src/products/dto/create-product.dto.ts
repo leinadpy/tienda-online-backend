@@ -73,12 +73,12 @@ export class CreateProductDto {
     example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
   })
   @IsString()
-  category_id: string;
+  categoryId: string;
 
   @ApiProperty({
     description: 'Brand id of the product',
     example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
   })
   @IsString()
-  brand_id: string;
+  brandId: string;
 }

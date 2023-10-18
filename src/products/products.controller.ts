@@ -8,13 +8,11 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { CreateProductDto, UpdateProductDto } from './dto';
 import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { Product } from './entities/product.entity';
@@ -22,14 +20,14 @@ import { Product } from './entities/product.entity';
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) { }
+  constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-   @ApiCreatedResponse({
+  @ApiCreatedResponse({
     description: 'The product has been successfully created.',
     type: Product,
   })
-  create(@Body() createProductDto: CreateProductDto) {
+  create(@Body() createProductDto: CreateProductDto): Promise<Product> {
     return this.productsService.create(createProductDto);
   }
 
@@ -38,35 +36,40 @@ export class ProductsController {
     description: 'The products has been successfully retrieved.',
     type: [Product],
   })
-  findAll() {
+  findAll(): Promise<Product[]> {
     return this.productsService.findAll();
   }
 
   @Get(':id')
-  // @ApiResponse({ description: 'The product has been successfully retrieved.' })
-  // @ApiNotFoundResponse({ description: 'Product not found.' })
-  @ApiResponse({ status: 200, description: 'The product has been successfully updated.' })
-  @ApiResponse({ status: 404, description: 'Product not found' })
-  findOne(@Param('id') id: string, @Body() productDto: CreateProductDto) {
+  @ApiOkResponse({
+    description: 'The product has been successfully retrieved.',
+    type: Product,
+  })
+  @ApiNotFoundResponse({ description: 'Product not found.' })
+  findOne(@Param('id') id: string): Promise<Product> {
     return this.productsService.findOne(id);
   }
 
-
   @Patch(':id')
-  // @ApiResponse({ description: 'The product has been successfully updated.' })
-  // @ApiNotFoundResponse({ description: 'Product not found.' })
-  @ApiResponse({ status: 200, description: 'The product has been successfully updated.' })
-  @ApiResponse({ status: 404, description: 'Product not found' })
-
-
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
+  @ApiOkResponse({
+    description: 'The product has been successfully updated.',
+    type: Product,
+  })
+  @ApiNotFoundResponse({ description: 'Product not found.' })
+  update(
+    @Param('id') id: string,
+    @Body() updateProductDto: UpdateProductDto,
+  ): Promise<Product> {
     return this.productsService.update(id, updateProductDto);
   }
 
   @Delete(':id')
-  @ApiResponse({ description: 'The product has been successfully deleted.' })
+  @ApiOkResponse({
+    description: 'The product has been successfully deleted.',
+    type: Product,
+  })
   @ApiNotFoundResponse({ description: 'Product not found.' })
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<Product> {
     return this.productsService.remove(id);
   }
 }

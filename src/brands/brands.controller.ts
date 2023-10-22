@@ -8,9 +8,13 @@ import {
   Delete,
 } from '@nestjs/common';
 import { BrandsService } from './brands.service';
-import { CreateBrandDto } from './dto/create-brand.dto';
-import { UpdateBrandDto } from './dto/update-brand.dto';
-import { ApiCreatedResponse, ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateBrandDto, UpdateBrandDto } from './dto';
+import {
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Brand } from './entities/brand.entity';
 
 @ApiTags('brands')
@@ -20,38 +24,52 @@ export class BrandsController {
 
   @Post()
   @ApiCreatedResponse({
-    description: 'The product has been successfully created.',
+    description: 'The Brand has been successfully created.',
     type: Brand,
   })
-  create(@Body() createBrandDto: CreateBrandDto) {
+  create(@Body() createBrandDto: CreateBrandDto): Promise<Brand> {
     return this.brandsService.create(createBrandDto);
   }
 
   @Get()
   @ApiOkResponse({
-    description: 'The brand has been successfully retrieved.',
-    type:[Brand],
+    description: 'The brands has been successfully retrieved.',
+    type: [Brand],
   })
-  findAll() {
+  findAll(): Promise<Brand[]> {
     return this.brandsService.findAll();
   }
 
   @Get(':id')
-  @ApiResponse({ status: 200, description: 'The product has been successfully retrieved.' })
-  @ApiResponse({ status: 404, description: 'Product not found' })
-  findOne(@Param('id') id: string, @Body() brandDto: CreateBrandDto) {
+  @ApiOkResponse({
+    description: 'The brand has been successfully retrieved.',
+    type: Brand,
+  })
+  @ApiNotFoundResponse({ description: 'Brand not found' })
+  findOne(@Param('id') id: string): Promise<Brand> {
     return this.brandsService.findOne(id);
   }
 
   @Patch(':id')
-  @ApiResponse({ status: 200, description: 'The product has been successfully updated.' })
-  @ApiResponse({ status: 404, description: 'Product not found' })
-  update(@Param('id') id: string, @Body() updateBrandDto: UpdateBrandDto) {
+  @ApiOkResponse({
+    description: 'The brand has been successfully updated.',
+    type: Brand,
+  })
+  @ApiNotFoundResponse({ description: 'Brand not found' })
+  update(
+    @Param('id') id: string,
+    @Body() updateBrandDto: UpdateBrandDto,
+  ): Promise<Brand> {
     return this.brandsService.update(id, updateBrandDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  @ApiOkResponse({
+    description: 'The brand has been successfully deleted.',
+    type: Brand,
+  })
+  @ApiNotFoundResponse({ description: 'Brand not found' })
+  remove(@Param('id') id: string): Promise<Brand> {
     return this.brandsService.remove(id);
   }
 }

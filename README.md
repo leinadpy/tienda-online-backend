@@ -33,5 +33,6 @@ yarn start:dev
 ```
 http://localhost:3000/api
 ```
+8. Link para el DER: https://miro.com/app/board/uXjVMxagXPg=/
 
 # Notas para producción:

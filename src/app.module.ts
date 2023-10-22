@@ -10,7 +10,7 @@ import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { OrdersModule } from './orders/orders.module';
 import { CategoriesModule } from './categories/categories.module';
 import { BrandsModule } from './brands/brands.module';
-import { CartProductModule } from './cart_product/cart_product.module';
+import { CartProductModule } from './cart_product/cart-product.module';
 
 @Module({
   imports: [

@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
-import { Status } from '../../enum/shopping-cart.enum';
+import { Status } from '../enum/shopping-cart.enum';
 import { BaseEntity } from '../../shared/base-entity';
 import { CartProduct } from 'src/cart_product/entities/cart_product.entity';
 import { Customer } from 'src/customers/entities/customer.entity';

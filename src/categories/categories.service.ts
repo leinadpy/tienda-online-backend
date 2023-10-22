@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CreateCategoryDto, UpdateCategoryDto } from './dto';
 import { Category } from './entities/category.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -30,11 +29,25 @@ export class CategoriesService {
     return category;
   }
 
-  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(
+    id: string,
+    updateCategoryDto: UpdateCategoryDto,
+  ): Promise<Category> {
+    const category = await this.categoryRepository.preload({
+      id,
+      ...updateCategoryDto,
+    });
+
+    if (!category) throw new NotFoundException(`Category #${id} not found`);
+
+    return this.categoryRepository.save(category);
   }
 
-  async remove(id: string) {
-    return `This action removes a #${id} category`;
+  async remove(id: string): Promise<Category> {
+    const category = await this.findOne(id);
+
+    await this.categoryRepository.softDelete(id);
+
+    return category;
   }
 }

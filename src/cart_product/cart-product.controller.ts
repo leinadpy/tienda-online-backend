@@ -7,10 +7,10 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CartProductService } from './cart_product.service';
-import { CreateCartProductDto } from './dto/create-cart_product.dto';
-import { UpdateCartProductDto } from './dto/update-cart_product.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { CartProductService } from './cart-product.service';
+import { CreateCartProductDto, UpdateCartProductDto } from './dto';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { CartProduct } from './entities/cart_product.entity';
 
 @ApiTags('cart-product')
 @Controller('cart-product')
@@ -18,7 +18,13 @@ export class CartProductController {
   constructor(private readonly cartProductService: CartProductService) {}
 
   @Post()
-  create(@Body() createCartProductDto: CreateCartProductDto) {
+  @ApiCreatedResponse({
+    description: 'The cart product has been successfully created.',
+    type: CartProduct,
+  })
+  create(
+    @Body() createCartProductDto: CreateCartProductDto,
+  ): Promise<CartProduct> {
     return this.cartProductService.create(createCartProductDto);
   }
 

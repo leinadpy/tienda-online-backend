@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { CartProductService } from './cart-product.service';
 import { CreateCartProductDto, UpdateCartProductDto } from './dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CartProduct } from './entities/cart_product.entity';
 
 @ApiTags('cart-product')
@@ -18,7 +18,13 @@ export class CartProductController {
   constructor(private readonly cartProductService: CartProductService) {}
 
   @Post()
-  create(@Body() createCartProductDto: CreateCartProductDto): Promise<CartProduct> {
+  @ApiCreatedResponse({
+    description: 'The cart product has been successfully created.',
+    type: CartProduct,
+  })
+  create(
+    @Body() createCartProductDto: CreateCartProductDto,
+  ): Promise<CartProduct> {
     return this.cartProductService.create(createCartProductDto);
   }
 

@@ -50,9 +50,15 @@ export class AuthService {
   async validateUser(id: string): Promise<User> {
     const user = await this.usersService.findOneById(id);
 
+    if (!user) throw new UnauthorizedException('Token not valid');
+
     delete user.password;
 
     return user;
+  }
+
+  checkAuthStatus(user: User) {
+    return { ...user, token: this.getJwtToken(user.id) };
   }
 
   revalidateToken(user: User): AuthResponse {
